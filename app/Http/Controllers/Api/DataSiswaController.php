@@ -10,16 +10,20 @@ use App\Models\DataSiswa;
 
 class DataSiswaController extends Controller
 {
+    
     public function index()
     {
-        return DataSiswa::with(['user','portofolio','sertifikat'])->get();
+        $DataSiswa = DataSiswa::with(['user','portofolio','sertifikat'])->get();
         // This will still work and now show ALL portfolios and certificates per student
+        return response()->json($DataSiswa, 200);
     }
 
     public function show($id)
     {
-        return DataSiswa::with(['user','portofolio','sertifikat'])
+       $dataSiswa = DataSiswa::with(['user', 'portofolio', 'sertifikat'])
             ->findOrFail($id);
+        
+        return response()->json($dataSiswa, 200);
     }
 
         public function store(Request $request)

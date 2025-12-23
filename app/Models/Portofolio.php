@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Portofolio extends Model
 {
-    protected $hidden = []; // Make sure id_siswa isn't hidden
+    use HasFactory;
+
     protected $table = 'portofolio';
     protected $primaryKey = 'id_portofolio';
 
@@ -14,14 +16,19 @@ class Portofolio extends Model
         'nama',
         'deskripsi',
         'durasiPengerjaan',
+        'timestamp',
         'linkPortofolio',
         'gambar',
-        'timestamp',
-        'id_siswa' // Add this
+        'id_siswa',
     ];
-      public function dataSiswa()
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    public function dataSiswa()
     {
-        return $this->belongsTo(DataSiswa::class, 'id_siswa');
+        return $this->belongsTo(DataSiswa::class, 'id_siswa', 'id');
     }
 }
-

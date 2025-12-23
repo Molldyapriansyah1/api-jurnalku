@@ -2,36 +2,44 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use App\Models\Portofolio;
-use App\Models\Sertifikat;
 
 class DataSiswa extends Model
 {
+    use HasFactory;
+
     protected $table = 'data_siswa';
+    protected $primaryKey = 'id';
 
     protected $fillable = [
         'nama_siswa',
         'NIS',
         'rombel',
         'Rayon',
+        'new_column',
         'id_user',
-        'PFP'
+        'PFP',
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+    ];
+
+    // Relationships
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'id_user', 'id_user');
     }
 
     public function portofolio()
     {
-        return $this->hasMany(Portofolio::class, 'id_siswa'); // ✅ Fixed - use id_siswa
+        return $this->hasMany(Portofolio::class, 'id_siswa', 'id');
     }
 
     public function sertifikat()
     {
-        return $this->hasMany(Sertifikat::class, 'id_siswa'); // ✅ Fixed - use id_siswa
+        return $this->hasMany(Sertifikat::class, 'id_siswa', 'id');
     }
 }
