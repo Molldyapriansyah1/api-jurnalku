@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\DataSiswa;
@@ -60,4 +61,6 @@ class DataSiswaController extends Controller
         DataSiswa::destroy($id);
         return response()->json(['message' => 'Deleted']);
     }
+
+    
 }

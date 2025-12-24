@@ -9,6 +9,8 @@ class Sertifikat extends Model
 {
     use HasFactory;
 
+    protected $appends = ['file_url'];
+
     protected $table = 'sertifikat';
     protected $primaryKey = 'id_sertifikat';
 
@@ -27,5 +29,11 @@ class Sertifikat extends Model
     public function dataSiswa()
     {
         return $this->belongsTo(DataSiswa::class, 'id_siswa', 'id');
+    }
+    public function getFileUrlAttribute()
+    {
+        return $this->file
+            ? asset('storage/' . $this->file)
+            : null;
     }
 }

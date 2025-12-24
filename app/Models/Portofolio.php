@@ -9,6 +9,7 @@ class Portofolio extends Model
 {
     use HasFactory;
 
+
     protected $table = 'portofolio';
     protected $primaryKey = 'id_portofolio';
 
@@ -31,4 +32,5 @@ class Portofolio extends Model
     {
         return $this->belongsTo(DataSiswa::class, 'id_siswa', 'id');
     }
+
 }

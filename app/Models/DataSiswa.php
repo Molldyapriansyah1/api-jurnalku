@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
 
 class DataSiswa extends Model
 {
     use HasFactory;
+
+    protected $appends = ['pfp_url'];
 
     protected $table = 'data_siswa';
     protected $primaryKey = 'id';
@@ -42,4 +45,10 @@ class DataSiswa extends Model
     {
         return $this->hasMany(Sertifikat::class, 'id_siswa', 'id');
     }
+    public function getPfpUrlAttribute()
+{
+    return $this->PFP
+        ? asset('storage/' . $this->PFP)
+        : null;
+}
 }
